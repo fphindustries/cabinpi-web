@@ -73,5 +73,12 @@ namespace Fphi.CabinPi.Web.Services
             var updateOperation = TableOperation.Replace(currentValue);
             table.Execute(updateOperation);
         }
+
+        public List<ReadingAggregate> GetSensorData(string sensorName)
+        {
+            CloudTable table = GetCloudTable("SensorReadings");
+            TableQuery<ReadingAggregate> query = new TableQuery<ReadingAggregate>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, sensorName));
+            return table.ExecuteQuery(query).ToList();
+        }
     }
 }

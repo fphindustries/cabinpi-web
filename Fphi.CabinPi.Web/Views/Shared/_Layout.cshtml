@@ -21,7 +21,7 @@
 <body>
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
+            <a id="logo-container" href="#" class="brand-logo">CabinPi</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#">Navbar Link</a></li>
                 @await Html.PartialAsync("_LoginPartial")
@@ -73,8 +73,10 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/materialize/dist/js/materialize.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     </environment>
     <environment names="Staging,Production">
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
                 asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
                 asp-fallback-test="window.jQuery"

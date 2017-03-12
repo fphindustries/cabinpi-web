@@ -12,5 +12,6 @@ namespace Fphi.CabinPi.Web.Services
         List<SensorValue> GetCurrentSensorValues();
         void AddCurrentSensorValue(SensorValue newValue);
         void UpdateCurrentSensorValue(SensorValue currentValue);
+        List<ReadingAggregate> GetSensorData(string sensorName);
     }
 }
