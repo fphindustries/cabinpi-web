@@ -9,5 +9,8 @@ namespace Fphi.CabinPi.Web.Services
     public interface ICabinRepository
     {
         void AddSensorData(ReadingAggregate data);
+        List<SensorValue> GetCurrentSensorValues();
+        void AddCurrentSensorValue(SensorValue newValue);
+        void UpdateCurrentSensorValue(SensorValue currentValue);
     }
 }

@@ -17,11 +17,18 @@ namespace Fphi.CabinPi.Web.Services
         {
             _options = optionsAccessor.Value;
         }
+
+        public void AddCurrentSensorValue(SensorValue newValue)
+        {
+            CloudTable table = GetCloudTable("SensorValues");
+
+            TableOperation insertOperation = TableOperation.Insert(newValue);
+            table.Execute(insertOperation);
+        }
+
         public void AddSensorData(ReadingAggregate data)
         {
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_options.AzureTableConnectionString);
-            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
-            CloudTable table = tableClient.GetTableReference("SensorReadings");
+            CloudTable table = GetCloudTable("SensorReadings");
 
             TableOperation retrieveOperation = TableOperation.Retrieve<ReadingAggregate>(data.PartitionKey, data.RowKey);
             var result = table.Execute(retrieveOperation);
@@ -42,6 +49,29 @@ namespace Fphi.CabinPi.Web.Services
                 TableOperation insertOperation = TableOperation.Insert(data);
                 table.Execute(insertOperation);
             }
+        }
+
+        private CloudTable GetCloudTable(string tableName)
+        {
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(_options.AzureTableConnectionString);
+            CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
+            CloudTable table = tableClient.GetTableReference(tableName);
+            return table;
+        }
+
+        public List<SensorValue> GetCurrentSensorValues()
+        {
+            CloudTable table = GetCloudTable("SensorValues");
+            TableQuery<SensorValue> query = new TableQuery<SensorValue>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "Current"));
+            return table.ExecuteQuery(query).ToList();
+
+        }
+
+        public void UpdateCurrentSensorValue(SensorValue currentValue)
+        {
+            CloudTable table = GetCloudTable("SensorValues");
+            var updateOperation = TableOperation.Replace(currentValue);
+            table.Execute(updateOperation);
         }
     }
 }

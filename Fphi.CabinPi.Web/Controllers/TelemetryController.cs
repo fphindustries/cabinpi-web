@@ -25,9 +25,26 @@ namespace Fphi.CabinPi.Web.Controllers
         [HttpPost]
         public void Post([FromBody]Reading[] readings)
         {
+            List<SensorValue> currentValues = _repo.GetCurrentSensorValues();
             var sensorGroups = readings.GroupBy(r => r.SensorName);
             foreach(var sensorReadings in sensorGroups)
             {
+                var mostRecentReading = sensorReadings.OrderByDescending(r => r.SampleTime).First();
+                var currentValue = currentValues.SingleOrDefault(v => v.RowKey == sensorReadings.Key);
+                if(currentValue == null)
+                {
+                    SensorValue newValue = new SensorValue(sensorReadings.Key);
+                    newValue.Value = mostRecentReading.Value;
+                    newValue.SampleTime = mostRecentReading.SampleTime;
+                    _repo.AddCurrentSensorValue(newValue);
+                    currentValues.Add(newValue);
+                }
+                else
+                {
+                    currentValue.Value = mostRecentReading.Value;
+                    currentValue.SampleTime = mostRecentReading.SampleTime;
+                    _repo.UpdateCurrentSensorValue(currentValue);
+                }
                 var readingsByHour = sensorReadings.GroupBy(r => new { r.SampleTime.Date, r.SampleTime.Hour });
                 foreach(var reading in readingsByHour)
                 {
