@@ -9,6 +9,6 @@ namespace Fphi.CabinPi.Web.Models
     {
         public string SensorName { get; set; }
         public DateTime SampleTime { get; set; }
-        public float Value { get; set; }
+        public double Value { get; set; }
     }
 }

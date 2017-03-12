@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Fphi.CabinPi.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Options;
+using Fphi.CabinPi.Web.Services;
 
 namespace Fphi.CabinPi.Web.Controllers
 {
@@ -14,6 +16,11 @@ namespace Fphi.CabinPi.Web.Controllers
     [AllowAnonymous]
     public class TelemetryController : Controller
     {
+        private ICabinRepository _repo;
+        public TelemetryController(ICabinRepository cabinRepository)
+        {
+            _repo = cabinRepository;
+        }
         // POST: api/Telemetry
         [HttpPost]
         public void Post([FromBody]Reading[] readings)
@@ -24,16 +31,14 @@ namespace Fphi.CabinPi.Web.Controllers
                 var readingsByHour = sensorReadings.GroupBy(r => new { r.SampleTime.Date, r.SampleTime.Hour });
                 foreach(var reading in readingsByHour)
                 {
-                    var aggregate = new ReadingAggregate
+                    var aggregate = new ReadingAggregate(sensorReadings.Key, reading.Key.Date.AddHours(reading.Key.Hour))
                     {
-                        Sensor = sensorReadings.Key,
-                        Time = reading.Key.Date.AddHours(reading.Key.Hour),
                         Samples = reading.Count(),
                         Min = reading.Min(r => r.Value),
                         Average = reading.Average(r => r.Value),
-                        Max = reading.Average(r => r.Value)
+                        Max = reading.Max(r => r.Value)
                     };
-                    int i = 9;
+                    _repo.AddSensorData(aggregate);
                 }
             }
         }

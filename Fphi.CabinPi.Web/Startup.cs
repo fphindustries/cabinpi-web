@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Fphi.CabinPi.Web.Models;
+using Fphi.CabinPi.Web.Services;
 
 namespace Fphi.CabinPi.Web
 {
@@ -39,6 +41,10 @@ namespace Fphi.CabinPi.Web
 
             services.AddAuthentication(
                 SharedOptions => SharedOptions.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme);
+
+            services.Configure<AppOptions>(Configuration);
+
+            services.AddScoped<ICabinRepository, AzureTableCabinRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
