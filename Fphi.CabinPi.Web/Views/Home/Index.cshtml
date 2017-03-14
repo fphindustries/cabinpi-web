@@ -19,8 +19,7 @@
                         <p>
                             @Model.Single(m => m.RowKey == "InsideHum").Value.ToString("n1") % Humidity
                         </p>
-                        <div id="chart_div" data-data-url="@Url.Action("ChartData", "Home", new { sensorName = "InsideTemp" })"></div>
-
+                        <canvas id="tempChart" data-data-url="@Url.Action("TempChartData", "Home")" style="background-color:white"></canvas>
                     </div>
                 </div>
             </div>
@@ -30,12 +29,14 @@
                         <span class="card-title">Power</span>
                         <p>
                             <span class="large">
-                                @Model.Single(m => m.RowKey == "PiVolts").Value.ToString("n1") V
+                                @Model.Single(m => m.RowKey == "PimWatts").Value.ToString("n1") mW
+                                
                             </span>
                         </p>
                         <p>
-                            @Model.Single(m => m.RowKey == "PimWatts").Value.ToString("n1") mW
+                            @Model.Single(m => m.RowKey == "PiVolts").Value.ToString("n1") V
                         </p>
+                        <canvas id="powerChart" data-data-url="@Url.Action("PowerChartData", "Home")" style="background-color:white"></canvas>
                     </div>
                 </div>
             </div>
@@ -50,27 +51,20 @@
 @section scripts {
     <script type="text/javascript">
 
-        // Load the Visualization API and the piechart package.
-        google.charts.load('current', { 'packages': ['corechart'] });
+        var ctx = $("#tempChart");
+        var jsonData = $.ajax({
+            url: ctx.data("data-url"),
+            dataType: "json",
+            async: false
+        }).responseJSON;
+        var myChart = new Chart(ctx, jsonData);
 
-        // Set a callback to run when the Google Visualization API is loaded.
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-            var chartDiv = $("#chart_div")
-            var jsonData = $.ajax({
-                url: chartDiv.data("data-url"),
-                dataType: "json",
-                async: false
-            }).responseText;
-
-            // Create our data table out of JSON data loaded from server.
-            var data = new google.visualization.DataTable(jsonData);
-
-            // Instantiate and draw our chart, passing in some options.
-            var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-            chart.draw(data, { width: 400, height: 240 });
-        }
-
+        ctx = $("#powerChart");
+        jsonData = $.ajax({
+            url: ctx.data("data-url"),
+            dataType: "json",
+            async: false
+        }).responseJSON;
+        myChart = new Chart(ctx, jsonData);
     </script>
 }

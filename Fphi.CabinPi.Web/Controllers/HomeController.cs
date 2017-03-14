@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Fphi.CabinPi.Web.Services;
 using Fphi.CabinPi.Web.Models;
+using Newtonsoft.Json;
 
 namespace Fphi.CabinPi.Web.Controllers
 {
@@ -59,6 +60,50 @@ namespace Fphi.CabinPi.Web.Controllers
                 }
             }).ToArray();
             return Json(chartData);
+        }
+
+        public IActionResult TempChartData()
+        {
+            List<ReadingAggregate> sensorData = _repo.GetSensorData("InsideTemp");
+            var labels = sensorData.OrderBy(d => d.RowKey).Select(d => DateTime.Parse(d.RowKey).ToString("hh:mm")).ToArray();
+            var data = sensorData.OrderBy(d => d.RowKey).Select(d => d.Average).ToArray();
+            ChartJs chart = new ChartJs();
+            chart.type = "line";
+            chart.data = new ChartJs.Data()
+            {
+                labels = labels,
+                datasets = new ChartJs.Data.Dataset[]
+                {
+                    new ChartJs.Data.Dataset
+                    {
+                        label="Temp",
+                        data=data
+                    }
+                }
+            };
+            return Json(chart, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
+        }
+
+        public IActionResult PowerChartData()
+        {
+            List<ReadingAggregate> sensorData = _repo.GetSensorData("PimWatts");
+            var labels = sensorData.OrderBy(d => d.RowKey).Select(d => DateTime.Parse(d.RowKey).ToString("hh:mm")).ToArray();
+            var data = sensorData.OrderBy(d => d.RowKey).Select(d => d.Average).ToArray();
+            ChartJs chart = new ChartJs();
+            chart.type = "line";
+            chart.data = new ChartJs.Data()
+            {
+                labels = labels,
+                datasets = new ChartJs.Data.Dataset[]
+                {
+                    new ChartJs.Data.Dataset
+                    {
+                        label="milliWatts",
+                        data=data
+                    }
+                }
+            };
+            return Json(chart, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
     }
 }
