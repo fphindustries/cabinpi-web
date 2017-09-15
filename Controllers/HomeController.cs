@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Fphi.CabinPi.Web.Models;
+using InfluxDB.Net;
 
 namespace Fphi.CabinPi.Web.Controllers
 {
@@ -12,6 +13,7 @@ namespace Fphi.CabinPi.Web.Controllers
     {
         public IActionResult Index()
         {
+           
             return View();
         }
 
