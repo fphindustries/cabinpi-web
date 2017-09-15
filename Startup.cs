@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Fphi.CabinPi.Web.Services;
 
 namespace Fphi.CabinPi.Web
 {
@@ -22,6 +23,7 @@ namespace Fphi.CabinPi.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+            services.AddScoped<IInfluxService, InfluxService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

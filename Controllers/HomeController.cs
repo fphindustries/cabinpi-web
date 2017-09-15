@@ -5,16 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Fphi.CabinPi.Web.Models;
-using InfluxDB.Net;
+using Fphi.CabinPi.Web.Services;
 
 namespace Fphi.CabinPi.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private IInfluxService _influx;
+        public HomeController(IInfluxService influx)
+        {
+            _influx = influx;
+        }
+        public async Task<IActionResult> Index()
         {
            
-            return View();
+           var data = await _influx.GetSensorData();
+            return View(data);
         }
 
         public IActionResult About()
