@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from './theme/Home.vue'
-import NotFound from './theme/NotFound.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from './theme/Home.vue';
+import NotFound from './theme/NotFound.vue';
 
 // const Category = () => import('./theme/Category.vue')
 // const Login = () => import('./theme/Login.vue')
 // const NotFound = () => import('./theme/NotFound.vue')
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
@@ -17,6 +17,6 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '*', component: NotFound }
   ]
-})
+});
 
-export default router
+export default router;
