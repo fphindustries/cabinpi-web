@@ -3,6 +3,12 @@ module.exports = function (app) {
   var sensors = require('../controllers/sensorsController');
 
   // sensors Routes
-  app.route('/sensors')
-    .get(sensors.getAll);
+  app.route('/sensors/sht31')
+    .get(sensors.getSht31);
+  app.route('/sensors/bmp280')
+    .get(sensors.getBmp280);
+  app.route('/sensors/ds18b20')
+    .get(sensors.getDs18b20);
+  app.route('/sensors/ina219')
+    .get(sensors.getIna219);
 };
