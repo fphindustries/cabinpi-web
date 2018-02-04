@@ -34,6 +34,14 @@ const appService = {
           resolve(response.data);
         });
     });
+  },
+  getForecast () {
+    return new Promise((resolve) => {
+      axios.get('/forecast')
+        .then(response => {
+          resolve(response.data);
+        });
+    });
   }
 };
 

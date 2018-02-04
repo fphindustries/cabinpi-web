@@ -1,5 +1,9 @@
 <template>
   <div>
+
+                              <div id="title_3" class="title">LCARS SDK Visual Guide</div>
+                              <div class="bar flexch bg-green-4" id="bar_4"></div>
+
     <p>Interior: {{ sht31.fahrenheit}}</p>
     <p>Humidity: {{ sht31.humidity}}</p>
     <p>Exterior: {{ ds18b20.fahrenheit}}</p>

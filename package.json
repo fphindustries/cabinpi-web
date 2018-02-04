@@ -23,7 +23,10 @@
     "config": "^1.29.2",
     "express": "^4.16.2",
     "influx": "^5.0.7",
+    "moment": "^2.20.1",
+    "noaa-forecasts": "0.0.4",
     "vue": "^2.5.13",
+    "vue-material": "^1.0.0-beta-7",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
