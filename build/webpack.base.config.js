@@ -13,6 +13,14 @@ const config = {
         exclude: /node_modules/
       },
       {
+        test: /\.(ttf|eot|woff|woff2)$/,
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+          outputPath: 'assets/'
+        }
+      },
+      {
         test: /\.vue$/,
         loader: 'vue-loader',
         options: {

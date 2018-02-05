@@ -22,6 +22,7 @@
     "bulma": "^0.6.2",
     "config": "^1.29.2",
     "express": "^4.16.2",
+    "file-loader": "^1.1.6",
     "influx": "^5.0.7",
     "moment": "^2.20.1",
     "noaa-forecasts": "0.0.4",

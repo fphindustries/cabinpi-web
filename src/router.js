@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from './theme/Home.vue';
+import Environment from './theme/Environment.vue';
 import Forecast from './theme/Forecast.vue';
 import NotFound from './theme/NotFound.vue';
 
@@ -17,6 +18,7 @@ const router = new VueRouter({
   routes: [
     { path: '/', component: Home },
     { path: '/forecast', component: Forecast },
+    { path: '/environment', component: Environment },
     { path: '*', component: NotFound }
   ]
 });
