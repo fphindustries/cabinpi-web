@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from './theme/Home.vue';
-import Environment from './theme/Environment.vue';
-import Forecast from './theme/Forecast.vue';
-import NotFound from './theme/NotFound.vue';
+import Home from '../components/Home.vue';
+import Environment from '../components/Environment.vue';
+import Forecast from '../components/Forecast.vue';
+import NotFound from '../components/NotFound.vue';
 
 // const Category = () => import('./theme/Category.vue')
 // const Login = () => import('./theme/Login.vue')
@@ -14,13 +14,13 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: 'history',
   linkActiveClass: 'is-active',
-  scrollBehavior: (to, from, savedPosition) => ({ y: 0 }),
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     { path: '/', component: Home },
     { path: '/forecast', component: Forecast },
     { path: '/environment', component: Environment },
-    { path: '*', component: NotFound }
-  ]
+    { path: '*', component: NotFound },
+  ],
 });
 
 export default router;

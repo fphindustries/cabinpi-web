@@ -6,8 +6,6 @@ Vue.use(Vuex);
 const state = {
 };
 
-const store = new Vuex.Store({
-  state
-});
+const store = new Vuex.Store({ state });
 
 export default store;

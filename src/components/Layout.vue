@@ -27,15 +27,15 @@
   </div>
 </template>
 <script>
-  import AppHeader from './AppHeader.vue';
-  import AppFooter from './AppFooter.vue';
+import AppHeader from './AppHeader.vue';
+import AppFooter from './AppFooter.vue';
 
-  export default {
-    components: {
-      'app-header': AppHeader,
-      'app-footer': AppFooter
-    }
-  };
+export default {
+  components: {
+    'app-header': AppHeader,
+    'app-footer': AppFooter,
+  },
+};
 </script>
 <style lang="scss">
   @import '../assets/css/lcarssdk.css';

@@ -24,33 +24,33 @@
 </template>
 
 <script>
-  import appService from '../app.service';
+import restClient from '../services/restClient';
 
-  export default {
-    components: {
+export default {
+  components: {
+  },
+  data() {
+    return {
+      sht31: {},
+      bmp280: {},
+      ds18b20: {},
+    };
+  },
+  methods: {
+    loadSensors() {
+      restClient.getSht31().then((data) => {
+        this.sht31 = data;
+      });
+      restClient.getBmp280().then((data) => {
+        this.bmp280 = data;
+      });
+      restClient.getDs18b20().then((data) => {
+        this.ds18b20 = data;
+      });
     },
-    data () {
-      return {
-        sht31: {},
-        bmp280: {},
-        ds18b20: {}
-      };
-    },
-    methods: {
-      loadSensors () {
-        appService.getSht31().then(data => {
-          this.sht31 = data;
-        });
-        appService.getBmp280().then(data => {
-          this.bmp280 = data;
-        });
-        appService.getDs18b20().then(data => {
-          this.ds18b20 = data;
-        });
-      }
-    },
-    created () {
-      this.loadSensors();
-    }
-  };
+  },
+  created() {
+    this.loadSensors();
+  },
+};
 </script>
