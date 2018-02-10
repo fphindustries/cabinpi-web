@@ -36,4 +36,4 @@ dist/
 .idea/
 
 #configuration
-config/
+config/development.json

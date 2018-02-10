@@ -1,6 +1,7 @@
 const base = require('./webpack.base.config');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = Object.assign({}, base, {
   plugins: (base.plugins || []).concat([
@@ -17,6 +18,14 @@ config.module.rules
 
 config.plugins.push(
   new ExtractTextPlugin('assets/styles.css')
+);
+
+config.plugins.push(
+  new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: 'index.html',
+    inject: true
+  })
 );
 
 if (process.env.NODE_ENV === 'production') {

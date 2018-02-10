@@ -1,8 +1,12 @@
 const path = require('path')
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
 const config = {
   entry: {
-    app: path.resolve(__dirname, '../src/client-entry.js')
+    app: path.resolve(__dirname, '../src/main.js')
   },
   module: {
     rules: [
@@ -36,10 +40,17 @@ const config = {
     ]
   },
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../dist/client'),
     publicPath: '/',
     filename: 'assets/js/[name].js'
-  }
+  },
+  resolve: {
+    extensions: ['.js', '.vue', '.json'],
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': resolve('src'),
+    }
+  },
 }
 
 module.exports = config

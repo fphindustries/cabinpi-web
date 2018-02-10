@@ -1,0 +1,11 @@
+{
+  "telegraf": {
+    "host": "",
+    "username": "",
+    "password": "",
+    "database": ""
+  },
+  "server": {
+    "port": 8080
+  }
+}

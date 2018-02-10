@@ -27,8 +27,8 @@
   </div>
 </template>
 <script>
-import AppHeader from './AppHeader.vue';
-import AppFooter from './AppFooter.vue';
+import AppHeader from './components/AppHeader.vue';
+import AppFooter from './components/AppFooter.vue';
 
 export default {
   components: {
@@ -38,14 +38,14 @@ export default {
 };
 </script>
 <style lang="scss">
-  @import '../assets/css/lcarssdk.css';
-    @import '../assets/css/scrollbutton.css';
-    @import '../assets/css/levelbar.css';
-    @import '../assets/css/bracket.css';
-    @import '../assets/css/dialog.css';
-    @import '../assets/css/framing.css';
-    @import '../assets/css/button.css';
-    @import '../assets/css/theme_ussNotAffiliated.css';
+  @import './assets/css/lcarssdk.css';
+    @import './assets/css/scrollbutton.css';
+    @import './assets/css/levelbar.css';
+    @import './assets/css/bracket.css';
+    @import './assets/css/dialog.css';
+    @import './assets/css/framing.css';
+    @import './assets/css/button.css';
+    @import './assets/css/theme_ussNotAffiliated.css';
   //$primary: #287ab1;
   //@import '~bulma';
 

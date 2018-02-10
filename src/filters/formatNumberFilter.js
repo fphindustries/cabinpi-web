@@ -1,5 +1,5 @@
 
-const formatNumberFilter = function (value) {
+const formatNumberFilter = function formatNumber(value) {
   return Number(value).toFixed(2);
 };
 
