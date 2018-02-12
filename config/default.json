@@ -5,6 +5,11 @@
     "password": "",
     "database": ""
   },
+  "darksky": {
+    "key": "",
+    "latitude": 0,
+    "longitude": 0
+  },
   "server": {
     "port": 8080
   }

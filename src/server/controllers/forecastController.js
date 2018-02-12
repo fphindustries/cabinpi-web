@@ -1,29 +1,14 @@
-'use strict';
-
-const moment = require('moment');
-const noaaForecaster = require('noaa-forecasts');
+const axios = require('axios');
 const config = require('config');
 
-//const telgrafConfig = config.get('telegraf');
+axios.defaults.baseURL = 'https://api.darksky.net/forecast/';
+const darkskyConfig = config.get('darksky');
 
-exports.getForecast = function (req, res) {
-  var obj = {
-    listLatLon: '47.15,-120.9152',
-    product: 'time-series', // this is a default, it's not actually required
-    begin: moment().format('YYYY-MM-DDTHH:mm:ss'),
-    end: moment().add(3, 'days').format('YYYY-MM-DDTHH:mm:ss'),
-    //qpf: 'qpf', // first elementInputName - Liquid Precipitation Amount
-    //pop12: 'pop12', // another elementInputName - 12 hour probability of precipitation,
-    wx: 'wx',
-    icons: 'icons'
-  };
-
-  var token = 'TEXpzSWHQrwsAwxfUZziuKVIAzNTPoqg';
-  noaaForecaster.setToken(token);
-  noaaForecaster.getForecast(obj)
-    .then(forecast => {
-      res.json(forecast);
-    }).catch(err => {
+exports.getForecast = function getForecast(req, res) {
+  axios.get(`${darkskyConfig.key}/${darkskyConfig.latitude},${darkskyConfig.longitude}?exclude=minutely`)
+    .then((response) => {
+      res.json(response.data);
+    }).catch((err) => {
       res.status(500).send(err.stack);
     });
 };
