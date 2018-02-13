@@ -27,13 +27,57 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex';
 import AppHeader from './components/AppHeader.vue';
 import AppFooter from './components/AppFooter.vue';
+
+let self = this;
 
 export default {
   components: {
     'app-header': AppHeader,
     'app-footer': AppFooter,
+  },
+  timers: {
+    sensorTimer: {
+      time: 5000,
+      autostart: true,
+      repeat: true,
+      immediate: true,
+    },
+    forecastTimer: {
+      time: 180000, // 30 minutes
+      autostart: true,
+      repeat: true,
+      immediate: true,
+    },
+  },
+  data() {
+    return {
+      timer: {},
+    };
+  },
+  // mounted: () => {
+  //   console.log('hi');
+  //   // const self = this;
+  //   this.timer = window.setInterval(() => { console.log('x'); }, 5000);
+  // },
+  methods: {
+    ...mapActions({
+      refreshSensors: 'refreshSensors',
+      refreshForecast: 'refreshForecast',
+    }),
+    sensorTimer: () => {
+      console.log('sensor');
+      self.refreshSensors();
+    },
+    forecastTimer: () => {
+      console.log('forecast');
+      self.refreshForecast();
+    },
+  },
+  created() {
+    self = this;
   },
 };
 </script>

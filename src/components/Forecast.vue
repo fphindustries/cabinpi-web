@@ -5,25 +5,11 @@
 </template>
 
 <script>
-import restClient from '../services/restClient';
+import { mapGetters } from 'vuex';
 
 export default {
-  components: {
-  },
-  data() {
-    return {
-      forecast: {},
-    };
-  },
-  methods: {
-    loadForecast() {
-      restClient.getForecast().then((data) => {
-        this.forecast = data;
-      });
-    },
-  },
-  created() {
-    this.loadForecast();
+  computed: {
+    ...mapGetters(['forecast']),
   },
 };
 </script>
