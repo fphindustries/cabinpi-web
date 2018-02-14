@@ -57,22 +57,15 @@ export default {
       timer: {},
     };
   },
-  // mounted: () => {
-  //   console.log('hi');
-  //   // const self = this;
-  //   this.timer = window.setInterval(() => { console.log('x'); }, 5000);
-  // },
   methods: {
     ...mapActions({
       refreshSensors: 'refreshSensors',
       refreshForecast: 'refreshForecast',
     }),
     sensorTimer: () => {
-      console.log('sensor');
       self.refreshSensors();
     },
     forecastTimer: () => {
-      console.log('forecast');
       self.refreshForecast();
     },
   },
@@ -90,6 +83,7 @@ export default {
     @import './assets/css/framing.css';
     @import './assets/css/button.css';
     @import './assets/css/theme_ussNotAffiliated.css';
+    @import './assets/css/module.css';
   //$primary: #287ab1;
   //@import '~bulma';
 
