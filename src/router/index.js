@@ -4,6 +4,7 @@ import Home from '../components/Home.vue';
 import Environment from '../components/Environment.vue';
 import Forecast from '../components/Forecast.vue';
 import NotFound from '../components/NotFound.vue';
+import Power from '../components/Power.vue';
 
 // const Category = () => import('./theme/Category.vue')
 // const Login = () => import('./theme/Login.vue')
@@ -19,6 +20,7 @@ const router = new VueRouter({
     { path: '/', component: Home },
     { path: '/forecast', component: Forecast },
     { path: '/environment', component: Environment },
+    { path: '/power', component: Power },
     { path: '*', component: NotFound },
   ],
 });
