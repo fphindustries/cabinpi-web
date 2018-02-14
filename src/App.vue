@@ -40,7 +40,7 @@ export default {
   },
   timers: {
     sensorTimer: {
-      time: 5000,
+      time: 60000,
       autostart: true,
       repeat: true,
       immediate: true,
