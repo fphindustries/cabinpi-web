@@ -1,6 +1,6 @@
 <template>
   <div>
-    <temp-chart></temp-chart>
+    <temp-chart :data=this.dataValues :labels=this.dataLabels></temp-chart>
   </div>
 </template>
 
@@ -13,7 +13,13 @@ export default {
     'temp-chart': TemperatureChart,
   },
   computed: {
-    ...mapGetters(['sht31', 'bmp280', 'ds18b20']),
+    ...mapGetters(['sht31', 'bmp280', 'ds18b20', 'sht31oneDay']),
+    dataValues() {
+      return this.sht31oneDay.map(a => a.fahrenheit);
+    },
+    dataLabels() {
+      return this.sht31oneDay.map(a => a.time);
+    },
   },
 };
 </script>
