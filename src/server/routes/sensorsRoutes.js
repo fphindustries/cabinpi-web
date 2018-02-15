@@ -15,4 +15,6 @@ module.exports = function (app) {
     .get(sensors.getIna219);
   app.route('/api/forecast')
     .get(forecast.getForecast);
+  app.route('/api/sensors/sht31/1day')
+    .get(sensors.getSht31_1Day);
 };

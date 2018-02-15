@@ -11,6 +11,14 @@ const restClient = {
         });
     });
   },
+  getSht31oneDay() {
+    return new Promise((resolve) => {
+      axios.get('/sensors/sht31/1day')
+        .then((response) => {
+          resolve(response.data);
+        });
+    });
+  },
   getBmp280() {
     return new Promise((resolve) => {
       axios.get('/sensors/bmp280')

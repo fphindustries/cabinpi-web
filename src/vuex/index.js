@@ -10,6 +10,7 @@ const state = {
   ds18b20: {},
   ina219: {},
   forecast: {},
+  sht31oneDay: {},
 };
 
 const store = new Vuex.Store({
@@ -20,6 +21,7 @@ const store = new Vuex.Store({
     ds18b20: s => s.ds18b20,
     ina219: s => s.ina219,
     forecast: s => s.forecast,
+    sht31oneDay: s => s.sht31oneDay,
   },
   actions: {
     refreshSensors(context) {
@@ -41,6 +43,11 @@ const store = new Vuex.Store({
         context.commit('refreshForecast', data);
       });
     },
+    refreshCharts(context) {
+      restClient.getSht31oneDay().then((data) => {
+        context.commit('updateSht31oneDay', data);
+      });
+    },
   },
   mutations: {
     updateSht31(s, sht31) {
@@ -57,6 +64,9 @@ const store = new Vuex.Store({
     },
     refreshForecast(s, forecast) {
       s.forecast = forecast; // eslint-disable-line no-param-reassign
+    },
+    updateSht31oneDay(s, sht31oneDay) {
+      s.sht31oneDay = sht31oneDay; // eslint-disable-line no-param-reassign
     },
   },
 });

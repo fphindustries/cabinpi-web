@@ -42,3 +42,12 @@ exports.getIna219 = function (req, res) {
       res.status(500).send(err.stack);
     });
 };
+
+exports.getSht31_1Day = function (req, res) {
+  influx.query('select mean(fahrenheit) AS fahrenheit, mean(celsius) AS celsius, mean(humidity) as humidity from sht31 where time > now() - 1d group by time(1h)')
+    .then(queryResult => {
+      res.json(queryResult);
+    }).catch(err => {
+      res.status(500).send(err.stack);
+    });
+};

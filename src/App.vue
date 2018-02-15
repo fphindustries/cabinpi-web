@@ -46,7 +46,13 @@ export default {
       immediate: true,
     },
     forecastTimer: {
-      time: 180000, // 30 minutes
+      time: 1800000, // 30 minutes
+      autostart: true,
+      repeat: true,
+      immediate: true,
+    },
+    chartTimer: {
+      time: 300000, // 5 minutes
       autostart: true,
       repeat: true,
       immediate: true,
@@ -61,12 +67,16 @@ export default {
     ...mapActions({
       refreshSensors: 'refreshSensors',
       refreshForecast: 'refreshForecast',
+      refreshCharts: 'refreshCharts',
     }),
     sensorTimer: () => {
       self.refreshSensors();
     },
     forecastTimer: () => {
       self.refreshForecast();
+    },
+    chartTimer: () => {
+      self.refreshCharts();
     },
   },
   created() {
