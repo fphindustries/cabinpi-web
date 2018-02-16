@@ -36,6 +36,26 @@
                       <h4 class="text-green-2">{{ forecast.daily.summary }}</h4>
                     </div>
                   </div>
+                  <div class="row flexh">
+                    <div class="column">
+                      <h3 class="text-green-3">WIND</h3>
+                    </div>
+                    <div class="column">
+                      <h3 class="text-green-2">{{ forecast.currently.windSpeed }} @ {{ forecast.currently.windBearing }}&deg;</h3>
+                    </div>
+                    <div class="column">
+                      <h3 class="text-green-3">HUMIDITY</h3>
+                    </div>
+                    <div class="column">
+                      <h3 class="text-green-2">{{ forecast.currently.humidity }}</h3>
+                    </div>
+                    <div class="column">
+                      <h3 class="text-green-3">PRESSURE</h3>
+                    </div>
+                    <div class="column">
+                      <h3 class="text-green-2">{{ forecast.currently.pressure }}</h3>
+                    </div>
+                  </div>
                 </div>
                 <!--Header Bar Row-->
                 <div class="row frame flexh">
