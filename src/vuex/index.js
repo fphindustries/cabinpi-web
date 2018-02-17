@@ -5,37 +5,29 @@ import restClient from '../services/restClient';
 Vue.use(Vuex);
 
 const state = {
-  sht31: {},
-  bmp280: {},
-  ds18b20: {},
-  ina219: {},
+  sensors: {},
+  solar: {},
   forecast: {},
-  sht31oneDay: {},
+  sensors24Hours: {},
+  solar24Hours: {},
 };
 
 const store = new Vuex.Store({
   state,
   getters: {
-    sht31: s => s.sht31,
-    bmp280: s => s.bmp280,
-    ds18b20: s => s.ds18b20,
-    ina219: s => s.ina219,
+    sensors: s => s.sensors,
+    solar: s => s.solar,
     forecast: s => s.forecast,
-    sht31oneDay: s => s.sht31oneDay,
+    sensors24Hours: s => s.sensors24Hours,
+    solar24Hours: s => s.solar24Hours,
   },
   actions: {
     refreshSensors(context) {
-      restClient.getBmp280().then((data) => {
-        context.commit('updateBmp280', data);
+      restClient.getSensors().then((data) => {
+        context.commit('updateSensors', data);
       });
-      restClient.getDs18b20().then((data) => {
-        context.commit('updateDs18b20', data);
-      });
-      restClient.getIna219().then((data) => {
-        context.commit('updateIna219', data);
-      });
-      restClient.getSht31().then((data) => {
-        context.commit('updateSht31', data);
+      restClient.getSolar().then((data) => {
+        context.commit('updateSolar', data);
       });
     },
     refreshForecast(context) {
@@ -44,29 +36,29 @@ const store = new Vuex.Store({
       });
     },
     refreshCharts(context) {
-      restClient.getSht31oneDay().then((data) => {
-        context.commit('updateSht31oneDay', data);
+      restClient.getSensors24Hours().then((data) => {
+        context.commit('updateSensors24Hours', data);
+      });
+      restClient.getSolar24Hours().then((data) => {
+        context.commit('updateSolar24Hours', data);
       });
     },
   },
   mutations: {
-    updateSht31(s, sht31) {
-      s.sht31 = sht31; // eslint-disable-line no-param-reassign
+    updateSensors(s, sensors) {
+      s.sensors = sensors; // eslint-disable-line no-param-reassign
     },
-    updateBmp280(s, bmp280) {
-      s.bmp280 = bmp280; // eslint-disable-line no-param-reassign
-    },
-    updateDs18b20(s, ds18b20) {
-      s.ds18b20 = ds18b20; // eslint-disable-line no-param-reassign
-    },
-    updateIna219(s, ina219) {
-      s.ina219 = ina219; // eslint-disable-line no-param-reassign
+    updateSolar(s, solar) {
+      s.solar = solar; // eslint-disable-line no-param-reassign
     },
     refreshForecast(s, forecast) {
       s.forecast = forecast; // eslint-disable-line no-param-reassign
     },
-    updateSht31oneDay(s, sht31oneDay) {
-      s.sht31oneDay = sht31oneDay; // eslint-disable-line no-param-reassign
+    updateSensors24Hours(s, sensors24Hours) {
+      s.sensors24Hours = sensors24Hours; // eslint-disable-line no-param-reassign
+    },
+    updateSolar24Hours(s, solar24Hours) {
+      s.solar24Hours = solar24Hours; // eslint-disable-line no-param-reassign
     },
   },
 });

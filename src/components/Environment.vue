@@ -1,23 +1,37 @@
 <template>
-  <div>
-    <div class="column flexv flexch" id="column_65" style="width:350px">
-      <h3 id="htmlTag_66" class="htmlTag text-blue-3">Environmental Systems</h3>
-      <div class="complexButton bg-blue-2" id="complexButton_70">
-        <div class="cap left" id="cap_67"></div><div id="text_68" class="text" >{{ sht31.fahrenheit | formatNumber }}</div>
-        <div class="button" id="button_69" data-label="Interior"></div>
+  <div class="wrapper content flexcv">
+    <div class="row flexh">
+      <div class="column">
+        <h3 class="text-green-3">OUTSIDE</h3>
       </div>
-      <div class="complexButton bg-green-4" id="complexButton_74">
-        <div class="button" id="button_71" data-label="Exterior"></div>
-        <div id="text_72" class="text">{{ ds18b20.fahrenheit | formatNumber}}</div>
-        <div class="cap right" id="cap_73"></div>
+      <div class="column">
+        <h1 class="text-green-2">{{ sensors.ext_f | formatNumber }}</h1>
       </div>
-      <div class="complexButton bg-green-1" id="complexButton_77">
-        <div id="text_75" class="text">{{ sht31.humidity | formatNumber}}</div>
-        <div class="button" id="button_76" data-label="Humidity"></div>
+      <div class="column">
+        <h3 class="text-green-3">INSIDE</h3>
       </div>
-      <div class="complexButton bg-blue-1" id="complexButton_80">
-        <div class="button" id="button_78" data-label="Pressure"></div>
-        <div id="text_79" class="text">{{ bmp280.inHg | formatNumber}}</div>
+      <div class="column">
+        <h1 class="text-green-2">{{ sensors.int_f | formatNumber }}</h1>
+      </div>
+    </div>
+    <div class="row flexh">
+      <div class="column">
+        <h3 class="text-green-3">HUMIDITY</h3>
+      </div>
+      <div class="column">
+        <h3 class="text-green-2">{{ sensors.humidity | formatNumber }}</h3>
+      </div>
+      <div class="column">
+        <h3 class="text-green-3">PRESSURE</h3>
+      </div>
+      <div class="column">
+        <h3 class="text-green-2">{{ sensors.inHg | formatNumber }}</h3>
+      </div>
+      <div class="column">
+        <h3 class="text-green-3">CASE TEMP</h3>
+      </div>
+      <div class="column">
+        <h3 class="text-green-2">{{ sensors.case_f }}</h3>
       </div>
     </div>
   </div>
@@ -28,7 +42,7 @@ import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    ...mapGetters(['sht31', 'bmp280', 'ds18b20']),
+    ...mapGetters(['sensors']),
   },
 };
 </script>
