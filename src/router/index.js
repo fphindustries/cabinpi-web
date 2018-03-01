@@ -1,10 +1,10 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../components/Home.vue';
-import Environment from '../components/Environment.vue';
-import Forecast from '../components/Forecast.vue';
-import NotFound from '../components/NotFound.vue';
-import Power from '../components/Power.vue';
+import Home from '../components/Home';
+import Environment from '../components/Environment';
+import Forecast from '../components/Forecast';
+import NotFound from '../components/NotFound';
+import Power from '../components/Power';
 
 // const Category = () => import('./theme/Category.vue')
 // const Login = () => import('./theme/Login.vue')

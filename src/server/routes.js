@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = function (app) {
-  var sensors = require('../controllers/sensorsController');
-  var forecast = require('../controllers/forecastController');
+  var sensors = require('./controllers/sensorsController');
+  var forecast = require('./controllers/forecastController');
 
   // sensors Routes
   app.route('/api/sensors')

@@ -1,35 +1,53 @@
 <template>
-  <div class="wrapper row flexh" id="app">
-      <!--Left Column-->
-      <!--Main Frame-->
-      <div class="wrapper column flexv flexch" id="wpr_mainView">
-          <!--Header-->
-          <div id="terminal-framing" class="row flexh" style="height:60px;">
-              <div class="elbow top-left bg-blue-3 large no-event horizontal" id="elbow_196" style="width:250px; height:208px;">
-                  <div class="bar">
-                      <div class="block"></div>
-                  </div>
-              </div>
-              <div class="bar flexch bg-blue-3" id="bar_197"></div>
-              <div id="title_198" class="title text-blue-1">CabinPi</div>
-              <div class="cap bg-green-2 right" id="cap_199" style="margin-left:10px;"></div>
-          </div>
-          <!--Main Content Row-->
-          <div class="row flexh fexcv" style="margin-top: 0px;">
-              <app-header></app-header>
-              <div class="column flexch flexv" style="margin-top:40px; margin-left:40px; margin-right: 40px;">
-                      <div class="row header flexh" id="row_2">
-                        <router-view></router-view>
-                      </div>
-              </div>
-          </div>
-      </div>
+  <div class="page-container" id="app">
+    <md-app>
+      <md-app-toolbar class="md-primary">
+        <span class="md-title">My Title</span>
+      </md-app-toolbar>
+  <md-app-drawer md-permanent="full">
+    <md-toolbar class="md-transparent" md-elevation="0">
+      Navigation
+    </md-toolbar>
+    <md-list>
+      <md-list-item>
+          <md-icon>move_to_inbox</md-icon>
+        <router-link class="md-list-item-text" to="/" exact="" data-label="Home">Home
+        </router-link>
+      </md-list-item>
+
+      <md-list-item>
+          <md-icon>send</md-icon>
+        <router-link class="md-list-item-text" to="/environment" exact="" data-label="Environment">
+          Environment
+        </router-link>
+      </md-list-item>
+
+      <md-list-item>
+          <md-icon>delete</md-icon>
+        <router-link class="md-list-item-text" to="/power" exact="" data-label="Power">
+          Power
+        </router-link>
+      </md-list-item>
+
+      <md-list-item>
+          <md-icon>error</md-icon>
+        <router-link class="md-list-item-text" to="/forecast" exact="" data-label="Forecast">
+          Forecast
+        </router-link>
+      </md-list-item>
+    </md-list>
+  </md-app-drawer>
+
+      <md-app-content>
+        <router-view></router-view>
+      </md-app-content>
+    </md-app>
   </div>
 </template>
 <script>
 import { mapActions } from 'vuex';
-import AppHeader from './components/AppHeader.vue';
-import AppFooter from './components/AppFooter.vue';
+import AppHeader from './components/AppHeader';
+import AppFooter from './components/AppFooter';
 
 let self = this;
 
@@ -84,20 +102,15 @@ export default {
   },
 };
 </script>
-<style lang="scss">
-  @import './assets/css/lcarssdk.css';
-    @import './assets/css/scrollbutton.css';
-    @import './assets/css/levelbar.css';
-    @import './assets/css/bracket.css';
-    @import './assets/css/dialog.css';
-    @import './assets/css/framing.css';
-    @import './assets/css/button.css';
-    @import './assets/css/theme_ussNotAffiliated.css';
-    @import './assets/css/module.css';
-  //$primary: #287ab1;
-  //@import '~bulma';
-
-  .columns{
-    flex-wrap: wrap
+<style lang="scss" scoped>
+  .md-app {
+    //max-height: 400px;
+    border: 1px solid rgba(#000, .12);
   }
+
+  //  // Demo purposes only
+  // .md-drawer {
+  //   width: 230px;
+  //   max-width: calc(100vw - 125px);
+  // }
 </style>

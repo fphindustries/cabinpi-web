@@ -1,25 +1,40 @@
 <template>
-  <div class="column flexv primary-menu" style="width:250px; margin-top:148px;" data-section="visual-guide">
-      <div class="complexButton">
-        <router-link class="button bg-green-1" to="/" exact=""  data-label="Master Systems Display">
+  <div>
+    <h1>YouSuck</h1>
+  <md-app-drawer md-permanent="full">
+    <md-toolbar class="md-transparent" md-elevation="0">
+      Navigation
+    </md-toolbar>
+    <md-list>
+      <md-list-item>
+        <router-link class="" to="/" exact=""  data-label="Home">
+          <md-icon>move_to_inbox</md-icon>
+          <span class="md-list-item-text">Home</span>
         </router-link>
-      </div>
-      <div class="complexButton">
-        <router-link class="button bg-green-3" to="/environment" exact="" data-label="Environmental">
+      </md-list-item>
+
+      <md-list-item>
+        <router-link class="" to="/environment" exact="" data-label="Environment">
+          <md-icon>send</md-icon>
+          <span class="md-list-item-text">Sent Mail</span>
         </router-link>
-      </div>
-      <div class="complexButton">
-        <router-link class="button bg-blue-3" to="/power" exact="" data-label="Power">
+      </md-list-item>
+
+      <md-list-item>
+        <router-link class="" to="/power" exact="" data-label="Power">
+          <md-icon>delete</md-icon>
+          <span class="md-list-item-text">Trash</span>
         </router-link>
-      </div>
-      <div class="complexButton">
-        <router-link class="button bg-blue-1" to="/forecast" exact="" data-label="Forecast">
+      </md-list-item>
+
+      <md-list-item>
+        <router-link class="" to="/forecast" exact="" data-label="Forecast">
+          <md-icon>error</md-icon>
+          <span class="md-list-item-text">Spam</span>
         </router-link>
-      </div>
-      <div class="complexButton">
-          <div class="button bg-green-1" id="button_56" data-label="Optical"></div>
-      </div>
-      <div class="elbow bottom-left base bg-green-3 horizontal flexcv"></div>
+      </md-list-item>
+    </md-list>
+  </md-app-drawer>
   </div>
 </template>
 
