@@ -1,48 +1,21 @@
 <template>
-  <div class="page-container" id="app">
-    <md-app>
-      <md-app-toolbar class="md-primary">
-        <span class="md-title">My Title</span>
-      </md-app-toolbar>
-  <md-app-drawer md-permanent="full">
-    <md-toolbar class="md-transparent" md-elevation="0">
-      Navigation
-    </md-toolbar>
-    <md-list>
-      <md-list-item>
-          <md-icon>move_to_inbox</md-icon>
-        <router-link class="md-list-item-text" to="/" exact="" data-label="Home">Home
-        </router-link>
-      </md-list-item>
 
-      <md-list-item>
-          <md-icon>send</md-icon>
-        <router-link class="md-list-item-text" to="/environment" exact="" data-label="Environment">
-          Environment
-        </router-link>
-      </md-list-item>
-
-      <md-list-item>
-          <md-icon>delete</md-icon>
-        <router-link class="md-list-item-text" to="/power" exact="" data-label="Power">
-          Power
-        </router-link>
-      </md-list-item>
-
-      <md-list-item>
-          <md-icon>error</md-icon>
-        <router-link class="md-list-item-text" to="/forecast" exact="" data-label="Forecast">
-          Forecast
-        </router-link>
-      </md-list-item>
-    </md-list>
-  </md-app-drawer>
-
-      <md-app-content>
+      <div id="App" class="page-container">
+        <md-app>
+          <md-app-content>
         <router-view></router-view>
-      </md-app-content>
-    </md-app>
-  </div>
+      <md-bottom-bar md-sync-route>
+        <md-bottom-bar-item to="/" md-label="Home" md-icon="home"></md-bottom-bar-item>
+        <md-bottom-bar-item to="/environment" md-label="Posts" md-icon="favorite"></md-bottom-bar-item>
+        <md-bottom-bar-item to="/power" md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+        <md-bottom-bar-item to="/forecast" md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+        <md-bottom-bar-item to="/camera" md-label="Favorites" md-icon="favorite"></md-bottom-bar-item>
+      </md-bottom-bar>
+        </md-app-content>
+      </md-app>
+    </div>
+
+
 </template>
 <script>
 import { mapActions } from 'vuex';

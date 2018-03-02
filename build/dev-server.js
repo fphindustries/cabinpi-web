@@ -6,6 +6,15 @@ const express = require('express');
 const app = express();
 
 webPackConfig.then(configuration => {
+  configuration.entry.app = [
+    "webpack-hot-middleware/client",
+    configuration.entry.app
+  ];
+  // configuration.plugins.push(
+  //   new webpack.HotModuleReplacementPlugin(),
+  //   new webpack.NoEmitOnErrorsPlugin()
+  //   );
+
   const clientCompiler = webpack(configuration);
   app.use(
     require("webpack-dev-middleware")(clientCompiler, {
@@ -14,6 +23,8 @@ webPackConfig.then(configuration => {
       }
     })
   );
+
+  app.use(require("webpack-hot-middleware")(clientCompiler));
 
   var routes = require('../src/server/routes');
   routes(app);
