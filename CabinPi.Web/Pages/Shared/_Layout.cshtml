@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/weather-icons-master/css/weather-icons.min.css" />
     <link rel="stylesheet" href="~/lib/weather-icons-master/css/weather-icons-wind.min.css" />
+    <link rel="stylesheet" href="~/lib/fontawesome/css/all.css"/>
     <environment include="Development">
         <link rel="stylesheet" href="~/css/site.css" />
     </environment>
@@ -15,20 +16,20 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li is-active-route asp-page="Index" class="nav-item" >
-                    <a class="nav-link" asp-page="Index">Home</a>
+                    <a class="nav-link" asp-page="Index"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item" is-active-route asp-page="Forecast">
-                    <a class="nav-link" asp-page="Forecast">Weather</a>
+                    <a class="nav-link" asp-page="Forecast"><i class="fa fa-sun"></i> Weather</a>
                 </li>
                 <li class="nav-item" is-active-route asp-page="Pass">
-                    <a class="nav-link" asp-page="Pass">Pass</a>
+                    <a class="nav-link" asp-page="Pass"><i class="fa fa-car"></i> Pass</a>
                 </li>
                 <li class="nav-item" is-active-route asp-page="Camera">
-                    <a class="nav-link" asp-page="Camera">Camera</a>
+                    <a class="nav-link" asp-page="Camera"><i class="fa fa-camera"></i> Camera</a>
                 </li>
             </ul>
         </div>
