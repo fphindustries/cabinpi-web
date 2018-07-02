@@ -1,0 +1,54 @@
+﻿@page
+@model CabinPi.Web.Pages.ForecastModel
+@{
+    ViewData["Title"] = "Forecast";
+}
+<div class="container-fluid">
+    @if (Model.Forecast.Alerts != null)
+    {
+        foreach (var alert in Model.Forecast.Alerts)
+        {
+            <div class="row">
+                <div class="col">
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">@alert.Title</h4>
+                        <p>@Html.Raw(alert.DescriptionFormatted)</p>
+                        <hr>
+                        <p class="mb-0">Alert Time: @alert.DateTime Expires: @alert.ExpiresDateTime</p>
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+    }
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="wi @Model.Forecast.Currently.WeatherIconClass"></i> @Model.Forecast.Currently.TemperatureRounded˚ @Model.Forecast.Currently.Summary</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Feels Like: @Model.Forecast.Currently.ApparentTemperature˚ Low: @Model.Forecast.Daily.Data[0].TemperatureLowRounded˚ High: @Model.Forecast.Daily.Data[0].TemperatureHighRounded˚</h6>
+                    <p class="card-text">@Model.Forecast.Hourly.Summary</p>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <p class="lead">@Model.Forecast.Daily.Summary</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        @foreach (var day in Model.Forecast.Daily.Data)
+        {
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="wi @day.WeatherIconClass"></i> @day.DateTime.DayOfWeek</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Low: @day.TemperatureLowRounded˚ High: @day.TemperatureHighRounded˚</h6>
+                        <p class="card-text">@day.Summary</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

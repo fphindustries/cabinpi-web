@@ -1,0 +1,32 @@
+﻿@page
+@model CabinPi.Web.Pages.PassModel
+@{
+    ViewData["Title"] = "Pass";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <dl class="row">
+                <dt class="col-sm-4">Temperature</dt>
+                <dd class="col-sm-8">@Model.Conditions.TemperatureInFahrenheit˚</dd>
+
+                <dt class="col-sm-4">Restrictions @Model.Conditions.RestrictionOne.TravelDirection</dt>
+                <dd class="col-sm-8">@Model.Conditions.RestrictionOne.RestrictionText</dd>
+
+                <dt class="col-sm-4">Restrictions @Model.Conditions.RestrictionTwo.TravelDirection</dt>
+                <dd class="col-sm-8">@Model.Conditions.RestrictionTwo.RestrictionText</dd>
+
+                <dt class="col-sm-4">Road Conditions</dt>
+                <dd class="col-sm-8">@Model.Conditions.RoadCondition</dd>
+
+                <dt class="col-sm-4">Weather Conditions</dt>
+                <dd class="col-sm-8">@Model.Conditions.WeatherCondition</dd>
+
+                <dt class="col-sm-4">Updated</dt>
+                <dd class="col-sm-8">@Model.Conditions.DateUpdated</dd>
+            </dl>
+            <img class="img-fluid" src="http://images.wsdot.wa.gov/snoqualmie/flowmap/snoqualmie_pass.gif" asp-append-version="true" />
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿@page
+@model CabinPi.Web.Pages.CameraModel
+@{
+    ViewData["Title"] = "Camera";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <img class="img-fluid" src="?handler=latestimage" asp-append-version="true" />
+        </div>
+    </div>
+</div>
+
+
+
