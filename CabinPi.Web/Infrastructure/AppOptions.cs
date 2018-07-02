@@ -16,5 +16,6 @@ namespace CabinPi.Web.Infrastructure
         public double Longitude { get; set; }
         public string WsdotApi { get; set; }
         public string ImageDirectory { get; set; }
+        public string Timezone { get; set; }
     }
 }

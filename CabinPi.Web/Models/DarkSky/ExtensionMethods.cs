@@ -20,8 +20,9 @@ namespace CabinPi.Web.Models.DarkSky
         public static DateTime ToDateTimeFromUnixTimestamp(this long time, string timezone)
         {
             var dateTimeOffset = DateTimeOffset.FromUnixTimeSeconds(time);
-            var tzi = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
-            return TimeZoneInfo.ConvertTime(dateTimeOffset.DateTime, tzi);
+            return dateTimeOffset.DateTime.ToLocalTime();
+            //var tzi = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            //return TimeZoneInfo.ConvertTime(dateTimeOffset.DateTime, tzi);
         }
     }
 }
