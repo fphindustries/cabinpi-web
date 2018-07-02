@@ -49,6 +49,14 @@ namespace CabinPi.Web.Controllers
                 outsideTemp = outsideTemp.ToString("N1"),
                 outsideTempClass = outsideTemp.ToOutsideTempClass()
             });
+
+
+        }
+        [HttpGet("History")]
+        public async Task<ActionResult> GetHistory()
+        {
+            var results = await _influx.GetSensorHistory();
+            return new JsonResult(results.results[0].series[0]);
         }
 
     }

@@ -4,13 +4,22 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="container-fluid mt-3" id="container" data-sensor-url="@Url.Content("~/api/Sensor")">
+<div class="container-fluid mt-3" id="container" data-sensor-url="@Url.Content("~/api/Sensor")" , data-history-url="@Url.Content("~/api/Sensor/History")">
     <div class="row">
         <div class="col-sm">
             <div class="card text-white bg-dark" id="outside-temp-card">
+
                 <div class="card-header">Outside</div>
                 <div class="card-body">
-                    <h1><span id="outsideTemp">--</span>°</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1><span id="outsideTemp">--</span>°</h1>
+                        </div>
+                        <div class="col">
+                            <svg id="outside-sparkline" class="sparkline" width="150" height="50" stroke-width="3" stroke="white" fill="rgba(0,0,0,.3)"></svg>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -18,7 +27,14 @@
             <div class="card text-white bg-dark" id="inside-temp-card">
                 <div class="card-header">Inside</div>
                 <div class="card-body">
-                    <h1><span id="insideTemp">--</span>°</h1>
+                    <div class="row">
+                        <div class="col">
+                            <h1><span id="insideTemp">--</span>°</h1>
+                        </div>
+                        <div class="col">
+                            <svg id="inside-sparkline" class="sparkline" width="150" height="50" stroke-width="3" stroke="white" fill="rgba(0,0,0,.3)"></svg>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,10 +73,15 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+
+        </div>
+    </div>
 </div>
 
 @section Scripts
-{
+    {
     <script>
         function updateSensors() {
             $.get($("#container").data("sensor-url"), function (data) {
@@ -84,11 +105,25 @@
             });
         }
 
+        function updateSparkLines() {
+            $.get($("#container").data("history-url"), function (data) {
+                var intTemp = [];
+                var outTemp = [];
+                for (var i = 0; i < data.values.length; i++) {
+                    intTemp.push(data.values[i][9]);
+                    outTemp.push(data.values[i][4]);
+                }
+                sparkline.sparkline(document.querySelector("#inside-sparkline"), intTemp);
+                sparkline.sparkline(document.querySelector("#outside-sparkline"), outTemp);
+            });
+        }
+
         $(function () {
+            updateSparkLines();
             updateSensors();
             setInterval(function () {
-                console.log("Updating Sensors");
                 updateSensors();
+                updateSparkLines();
             }, 60000);
 
 
