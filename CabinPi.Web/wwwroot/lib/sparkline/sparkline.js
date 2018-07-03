@@ -164,12 +164,13 @@ function sparkline(svg, entries, options) {
   });
 
   // The rendering width will account for the spot size.
-  var width = parseFloat(svg.attributes.width.value) - spotDiameter * 2;
+  //var width = parseFloat(svg.attributes.width.value) - spotDiameter * 2;
+    var width = 100;
 
   // Get the SVG element's full height.
   // This is used
-  var fullHeight = parseFloat(svg.attributes.height.value);
-
+  //var fullHeight = parseFloat(svg.attributes.height.value);
+    var fullHeight = 50;
   // The rendering height accounts for stroke width and spot size.
   var height = fullHeight - strokeWidth * 2 - spotDiameter;
 

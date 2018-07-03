@@ -24,13 +24,19 @@ namespace CabinPi.Web.Services
 
         public async Task<Results> GetSolar()
         {
-            return await GetQueries("select * from solar group by * order by desc limit 1",
-                "select * from sensors group by * order by desc limit 1");
+            return await GetQueries("select * from solar where time > now() - 1h group by * order by desc limit 1",
+                "select * from sensors where time > now() - 1h group by * order by desc limit 1");
         }
 
         public async Task<Results> GetSensorHistory()
         {
-            return await GetQueries("select mean(case_c) AS case_c, mean(case_f) AS case_f, mean(ext_c) as ext_c, mean(ext_f) as ext_f, mean(hPa) as hPa, mean(humidity) as humidity, mean(inHg) as inHg, mean(int_c) as int_c, mean(int_f) as int_f, mean(pi_i) as pi_i, mean(pi_v) as pi_v, mean(pi_w) as pi_w from sensors where time > now() - 1d group by time(1h)");
+            //return await GetQueries("select mean(case_c) AS case_c, mean(case_f) AS case_f, mean(ext_c) as ext_c, mean(ext_f) as ext_f, mean(hPa) as hPa, mean(humidity) as humidity, mean(inHg) as inHg, mean(int_c) as int_c, mean(int_f) as int_f, mean(pi_i) as pi_i, mean(pi_v) as pi_v, mean(pi_w) as pi_w from sensors where time > now() - 1d group by time(1h)");
+            return await GetQueries("select mean(ext_f) as ext_f, mean(int_f) as int_f from sensors where time > now() - 1d group by time(1h)");
+        }
+
+        public async Task<Results> GetSolarHistory()
+        {
+            return await GetQueries("select mean(dispavgVbatt) as dispavgVbatt, mean(dispavgVpv) as dispavgVpv, mean(AmpHours) as AmpHours from solar where time > now() - 1d group by time(1h)");
         }
 
         private async Task<Results> GetQueries(params string[] queries)

@@ -17,9 +17,13 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li is-active-route asp-page="Index" class="nav-item" >
+                <li is-active-route asp-page="Index" class="nav-item">
                     <a class="nav-link" asp-page="Index"><i class="fa fa-home"></i> Home</a>
                 </li>
                 <li class="nav-item" is-active-route asp-page="Forecast">
@@ -34,6 +38,7 @@
             </ul>
         </div>
     </nav>
+
 
     @RenderBody()
     <script src="~/lib/jquery/dist/jquery.js"></script>

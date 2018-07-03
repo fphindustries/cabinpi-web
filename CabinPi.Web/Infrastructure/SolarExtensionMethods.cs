@@ -28,7 +28,7 @@ namespace CabinPi.Web.Infrastructure
             switch (state)
             {
                 case 0:
-                    return "light";
+                    return "dark";
                 case 3:
                 case 4:
                 case 5:
@@ -81,7 +81,7 @@ namespace CabinPi.Web.Infrastructure
             if (voltage > 0)
                 return "success";
 
-            return "light";
+            return "dark";
         }
 
     }

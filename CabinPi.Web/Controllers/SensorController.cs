@@ -59,5 +59,11 @@ namespace CabinPi.Web.Controllers
             return new JsonResult(results.results[0].series[0]);
         }
 
+        [HttpGet("SolarHistory")]
+        public async Task<ActionResult> GetSolarHistory()
+        {
+            var results = await _influx.GetSolarHistory();
+            return new JsonResult(results.results[0].series[0]);
+        }
     }
 }

@@ -4,9 +4,9 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="container-fluid mt-3" id="container" data-sensor-url="@Url.Content("~/api/Sensor")" , data-history-url="@Url.Content("~/api/Sensor/History")">
+<div class="container-fluid" id="container" data-sensor-url="@Url.Content("~/api/Sensor")" data-history-url="@Url.Content("~/api/Sensor/History")" data-solar-history-url="@Url.Content("~/api/Sensor/SolarHistory")">
     <div class="row">
-        <div class="col-sm">
+        <div class="col-sm mt-3">
             <div class="card text-white bg-dark" id="outside-temp-card">
 
                 <div class="card-header">Outside</div>
@@ -16,14 +16,13 @@
                             <h1><span id="outsideTemp">--</span>°</h1>
                         </div>
                         <div class="col">
-                            <svg id="outside-sparkline" class="sparkline" width="150" height="50" stroke-width="3" stroke="white" fill="rgba(0,0,0,.3)"></svg>
+                            <svg id="outside-sparkline" class="sparkline" viewBox="0 0 100 50" stroke-width="2" stroke="white" fill="rgba(0,0,0,.3)"></svg>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-        <div class="col-sm">
+        <div class="col-sm mt-3">
             <div class="card text-white bg-dark" id="inside-temp-card">
                 <div class="card-header">Inside</div>
                 <div class="card-body">
@@ -32,15 +31,15 @@
                             <h1><span id="insideTemp">--</span>°</h1>
                         </div>
                         <div class="col">
-                            <svg id="inside-sparkline" class="sparkline" width="150" height="50" stroke-width="3" stroke="white" fill="rgba(0,0,0,.3)"></svg>
+                            <svg id="inside-sparkline" class="sparkline" viewBox="0 0 100 50" stroke-width="2" stroke="white" fill="rgba(0,0,0,.3)"></svg>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row mt-3">
-        <div class="col-sm">
+    <div class="row">
+        <div class="col-sm mt-3">
             <div class="card text-white bg-dark" id="battery-state-card">
                 <div class="card-header">System State</div>
                 <div class="card-body">
@@ -48,27 +47,30 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm">
+        <div class="col-sm mt-3">
             <div class="card text-white bg-dark" id="battery-charge-card">
                 <div class="card-header">Battery</div>
                 <div class="card-body">
                     <h1><span id="batteryCharge">--</span>V</h1>
+                    <svg id="batt-sparkline" class="sparkline" viewBox="0 0 100 50" stroke-width="2" stroke="white" fill="rgba(0,0,0,.3)"></svg>
                 </div>
             </div>
         </div>
-        <div class="col-sm">
+        <div class="col-sm mt-3">
             <div class="card text-white bg-dark" id="panel-voltage-card">
                 <div class="card-header">Panel Voltage</div>
                 <div class="card-body">
                     <h1><span id="panelVoltage">--</span>V</h1>
+                    <svg id="pv-sparkline" class="sparkline" viewBox="0 0 100 50" stroke-width="2" stroke="white" fill="rgba(0,0,0,.3)"></svg>
                 </div>
             </div>
         </div>
-        <div class="col-sm">
+        <div class="col-sm mt-3">
             <div class="card">
                 <div class="card-header">Amp Hours</div>
                 <div class="card-body">
                     <h1><span id="ampHours">--</span>Ah</h1>
+                    <svg id="ah-sparkline" class="sparkline" viewBox="0 0 100 50" stroke-width="2" stroke="black" fill="rgba(0,0,0,.3)"></svg>
                 </div>
             </div>
         </div>
@@ -110,11 +112,25 @@
                 var intTemp = [];
                 var outTemp = [];
                 for (var i = 0; i < data.values.length; i++) {
-                    intTemp.push(data.values[i][9]);
-                    outTemp.push(data.values[i][4]);
+                    intTemp.push(data.values[i][2]);
+                    outTemp.push(data.values[i][1]);
                 }
                 sparkline.sparkline(document.querySelector("#inside-sparkline"), intTemp);
                 sparkline.sparkline(document.querySelector("#outside-sparkline"), outTemp);
+            });
+
+            $.get($("#container").data("solar-history-url"), function (data) {
+                var batt = [];
+                var pv = [];
+                var ah = [];
+                for (var i = 0; i < data.values.length; i++) {
+                    batt.push(data.values[i][1]);
+                    pv.push(data.values[i][2]);
+                    ah.push(data.values[i][3]);
+                }
+                sparkline.sparkline(document.querySelector("#batt-sparkline"), batt);
+                sparkline.sparkline(document.querySelector("#pv-sparkline"), pv);
+                sparkline.sparkline(document.querySelector("#ah-sparkline"), ah);
             });
         }
 
